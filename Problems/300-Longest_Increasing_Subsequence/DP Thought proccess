@@ -1,0 +1,26 @@
+Given an integer array nums, return the length of the longest strictly increasing subsequence. 
+A subsequence is an array that can be derived from another array by deleting some or no elements 
+without changing the order of the remaining elements.
+
+
+
+Notice how working right to left of an array we can calculate the largest subsequence better.
+[10,9,2,5,3,7,101,18]
+
+We can store the max substing length for each starting posistion in an array DP. Since any position is
+at least 1 we initialise every index to 1.
+
+
+
+
+
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        dp=[1]*len(nums)
+
+        for i in range(len(dp)-1,-1,-1):
+            for j in range(i+1,len(dp)):
+                if nums[j]>nums[i]:
+                    dp[i]=max(dp[i],dp[j]+1)
+
+        return max(dp)
